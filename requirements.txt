@@ -1,0 +1,6 @@
+Flask
+matplotlib
+seaborn
+scikit-learn
+numpy
+pandas
