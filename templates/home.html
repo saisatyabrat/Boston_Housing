@@ -1,3 +1,242 @@
-<h1>
-    Hello world
-</h1>
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boston House Price Prediction</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+            padding: 30px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 950px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .title h1 {
+            color: #ffffff;
+            font-size: 40px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .title p {
+            color: #cbd5e1;
+            font-size: 16px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .input-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-box label {
+            color: #f8fafc;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .input-box input {
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+            background: rgba(255, 255, 255, 0.12);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .input-box input::placeholder {
+            color: #cbd5e1;
+        }
+
+        .input-box input:focus {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 35px;
+        }
+
+        .predict-btn {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            color: white;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
+        }
+
+        .predict-btn:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, #1d4ed8, #2563eb);
+        }
+
+        .result {
+            margin-top: 35px;
+            text-align: center;
+            padding: 18px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+
+            .title h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="title">
+            <h1>Boston House Price Prediction</h1>
+            <p>Predict house prices instantly using Machine Learning</p>
+        </div>
+
+        <form action="{{ url_for('predict') }}" method="post">
+
+            <div class="form-grid">
+
+                <div class="input-box">
+                    <label>CRIM</label>
+                    <input type="text" name="CRIM" placeholder="Enter CRIM value" required>
+                </div>
+
+                <div class="input-box">
+                    <label>ZN</label>
+                    <input type="text" name="ZN" placeholder="Enter ZN value" required>
+                </div>
+
+                <div class="input-box">
+                    <label>INDUS</label>
+                    <input type="text" name="INDUS" placeholder="Enter INDUS value" required>
+                </div>
+
+                <div class="input-box">
+                    <label>CHAS</label>
+                    <input type="text" name="CHAS" placeholder="Enter CHAS value" required>
+                </div>
+
+                <div class="input-box">
+                    <label>NOX</label>
+                    <input type="text" name="NOX" placeholder="Enter NOX value" required>
+                </div>
+
+                <div class="input-box">
+                    <label>RM</label>
+                    <input type="text" name="RM" placeholder="Enter RM value" required>
+                </div>
+
+                <div class="input-box">
+                    <label>AGE</label>
+                    <input type="text" name="AGE" placeholder="Enter AGE value" required>
+                </div>
+
+                <div class="input-box">
+                    <label>DIS</label>
+                    <input type="text" name="DIS" placeholder="Enter DIS value" required>
+                </div>
+
+                <div class="input-box">
+                    <label>RAD</label>
+                    <input type="text" name="RAD" placeholder="Enter RAD value" required>
+                </div>
+
+                <div class="input-box">
+                    <label>TAX</label>
+                    <input type="text" name="TAX" placeholder="Enter TAX value" required>
+                </div>
+
+                <div class="input-box">
+                    <label>PTRATIO</label>
+                    <input type="text" name="PTRATIO" placeholder="Enter PTRATIO value" required>
+                </div>
+
+                <div class="input-box">
+                    <label>B</label>
+                    <input type="text" name="B" placeholder="Enter B value" required>
+                </div>
+
+                <div class="input-box">
+                    <label>LSTAT</label>
+                    <input type="text" name="LSTAT" placeholder="Enter LSTAT value" required>
+                </div>
+
+            </div>
+
+            <div class="btn-container">
+                <button type="submit" class="predict-btn">
+                    Predict House Price
+                </button>
+            </div>
+
+        </form>
+
+        {% if prediction_text %}
+        <div class="result">
+            {{ prediction_text }}
+        </div>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
+```
